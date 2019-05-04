@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>yeni kullanıcı ekle</title>
 	<style type="text/css">
 		button{
