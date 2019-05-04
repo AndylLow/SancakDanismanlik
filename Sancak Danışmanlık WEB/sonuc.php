@@ -67,13 +67,13 @@ background-size: cover;}
 	if($_POST["action"]=="add"){
 		mysqli_query($link,"Insert into danisanlar (isim,soyisim,numara) values('".$_POST["isim"]."','".$_POST["soyisim"]."','".$_POST["numara"]."')");
 	}
-	if($_POST["action"]=="update"){
+	if($_POST["action"]=="uppdate"){
 		$selected=$_POST["target"];
 
 		if($_POST["privilige"]>0)
-			mysqli_query($link,"Update danisanlar SET isim='".$_POST["isim"]."',soyisim='".$_POST["soyisim"]."',numara='".$_POST["numara"]."',ucret='".$_POST["ucret"]."',notlar'".$_POST["notlar"]."' where ID='$selected' ");
+			mysqli_query($link,"Update danisanlar SET isim='".$_POST["isim"]."',soyisim='".$_POST["soyisim"]."',numara='".$_POST["numara"]."',ucret='".$_POST["ucret"]."',notlar='".$_POST["notlar"]."' where ID='$selected'; ");
 		else 
-			mysqli_query($link,"Update danisanlar SET isim='".$_POST["isim"]."',soyisim='".$_POST["soyisim"]."',numara='".$_POST["numara"]."',ucret='".$_POST["ucret"]."' where ID='$selected' ");
+			mysqli_query($link,"Update danisanlar SET isim='".$_POST["isim"]."',soyisim='".$_POST["soyisim"]."',numara='".$_POST["numara"]."',ucret='".$_POST["ucret"]."' where ID='$selected'; ");
 	}
 
 	echo "

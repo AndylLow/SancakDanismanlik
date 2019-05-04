@@ -46,10 +46,12 @@ echo "
 <input type='text' name='username' hidden value='".$_POST["username"]."'>
 <input type='text' name='password' hidden value='".$_POST["password"]."'>
 </form>
-<form action='sonuc.php' method='post'>
+
 <h1 style='margin-left: 70%;margin-top: -50px'><strong>Sancak Danışmanlık</strong></h1>
 <br><br><br>
 <div style='margin-left: 150px'>
+
+<form action='sonuc.php' method='post'>
 isim:<input type='text' name='isim' value='".$rs["isim"]."'>
 soyisim:<input type='text' name='soyisim' value='".$rs["soyisim"]."'>
 <br><br>
@@ -71,7 +73,7 @@ echo "
 echo "
 	
 		<button style='margin-left: 600px'>Kaydet</button>
-		<input type='text' name='action' hidden value='update'>
+		<input type='text' name='action' hidden value='uppdate'>
 		<input type='text' name='privilige' hidden value='$val'>
 		<input type='text' name='target' hidden value='".$rs["ID"]."'>
 		<input type='text' name='username' hidden value='".$_POST["username"]."'>
