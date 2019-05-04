@@ -28,14 +28,14 @@
 <button style="margin: 50px 50px">Geri Dön</button>
 <h1>KULLANICI EKLE</h1>
 <br><div align="center">
-<form>
+<form action="sonuc2.php" method="post">
 	kullanıcı girişi:<input type="text" name="giris"><br><br>
 	kullanıcı şifresi:<input type="password" name="sifre"><br><br>
 	kullanıcı şifresi(tekrar):<input type="password" name="sifretekrar"><br><br>
 	Telefon numarası:<input type="text" name="tel no"><br><br>
-	<select>
-		<option selected="true">Sekreter</option>
-		<option>Danışman</option>
+	<select name="selection">
+		<option selected="true" value="0">Sekreter</option>
+		<option value="1">Danışman</option>
 	</select><br><br>
 	<button>Kaydet</button>
 </form>

@@ -105,7 +105,6 @@ i {
 </style>
 </head>
 <body style='background-color: orange'>
-  
   <?php
 
   $link=mysqli_connect('localhost','root','');
@@ -115,12 +114,16 @@ i {
   $rs=mysqli_fetch_array($rs);
   $return=$rs["privilige"];
   if($rs["password"]==$_POST["password"]){
-    
+     if($return>1)
   echo "
   <a href='yenikullanici.php' >
 	<p style='float: right; '>Yeni Çalışan Ekle </a>|<a href='index.php'> Çıkış Yap</a></p><pre><h1> Sancak Danışmanlık</h1></pre>
 	<br><br><br>
-	
+	"; else echo "<p style='float: right; '><a href='index.php'> Çıkış Yap</a></p><pre><h1> Sancak Danışmanlık</h1></pre>
+  <br><br><br>";
+
+
+    echo "
 	<section ><form action='danisan1.php' method='post'>
   		<nav>
   			<select name='selection' size='20'>
