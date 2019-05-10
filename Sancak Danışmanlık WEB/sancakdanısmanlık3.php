@@ -103,8 +103,27 @@ i {
   text-align: center;
 }
 </style>
+	<script type='text/javascript'>
+				function loadDoc() {
+				  iste=document.getElementById('selectionn').value;
+				  var xhttp = new XMLHttpRequest();
+				  xhttp.onreadystatechange = function() {
+				    if (this.readyState == 4 && this.status == 200) {
+				      document.getElementById('demo').innerHTML = this.responseText;
+				    }
+				  };
+				  xhttp.open('POST', 'istek.php', true);
+				  xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+				  xhttp.send("danisanID="+iste);																									
+				  
+				}
+	</script>
+		
+	}
+
 </head>
 <body style='background-color: orange'>
+	
   <?php
 
   $link=mysqli_connect('localhost','root','');
@@ -115,18 +134,19 @@ i {
   $return=$rs["privilige"];
   if($rs["password"]==$_POST["password"]){
      if($return>1)
-  echo "
-  <a href='yenikullanici.php' >
-	<p style='float: right; '>Yeni Çalışan Ekle </a>|<a href='index.php'> Çıkış Yap</a></p><pre><h1> Sancak Danışmanlık</h1></pre>
-	<br><br><br>
-	"; else echo "<p style='float: right; '><a href='index.php'> Çıkış Yap</a></p><pre><h1> Sancak Danışmanlık</h1></pre>
-  <br><br><br>";
+	  echo "
+	  <a href='yenikullanici.php' >
+		<p style='float: right; '>Yeni Çalışan Ekle </a>|<a href='index.php'> Çıkış Yap</a></p><pre><h1> Sancak Danışmanlık</h1></pre>
+		<br><br><br>
+		"; 
+	  else echo "<p style='float: right; '><a href='index.php'> Çıkış Yap</a></p><pre><h1> Sancak Danışmanlık</h1></pre>
+  		<br><br><br>";
 
 
     echo "
 	<section ><form action='danisan1.php' method='post'>
   		<nav>
-  			<select name='selection' size='20'>
+  			<select name='selection' id='selectionn' onchange='loadDoc()' size='20'>
           ";
           
           $link=mysqli_connect('localhost','root','');
@@ -152,11 +172,11 @@ i {
   			
   		</nav>
   
-  <nav><button type='submit'>Sayfaya git</button></form><pre><br><br><br><br><br><br>									<pre style='font-size: 150%; color: gold;'><strong>              		 ".$bir."
+  <nav><button type='submit'>Sayfaya git</button></form><br><br><br><br><br><br><pre id='demo' style='font-size: 150%; color: gold;'><strong>              		 ".$bir."
   			Ödenecek:    ".$fiyatı."TL
-               		  ".$numarası."</strong></pre></pre></nav>
+               		  ".$numarası."</strong></pre></nav>
   
- </nav><nav></nav><nav></nav>
+ <nav></nav><nav></nav>
   <br><br><br><br><br><br><br>
   	<pre style='font-size: 150%; color: gold;'> <strong>Yeni Danışan Ekle</strong></pre>
   	<form action='sonuc.php' method='post'>
