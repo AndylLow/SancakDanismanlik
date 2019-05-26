@@ -65,7 +65,7 @@ footer {
   }
 }
 option{
-	padding:0px 75px;
+	padding:0px 50px;
 	color: black;
 }
 .btn {
@@ -102,6 +102,15 @@ i {
   min-width: 50px;
   text-align: center;
 }
+.mybut{
+  margin-left: -20%;
+}
+.call{
+  width: 63%;
+  height: 60%;
+  margin-left: -7%;
+  margin-top: -5%;
+}
 </style>
 	<script type='text/javascript'>
 				function loadDoc() {
@@ -118,8 +127,175 @@ i {
 				  
 				}
 	</script>
-		
-	}
+
+	<link href='packages/core/main.css' rel='stylesheet' />
+  <link href='packages/daygrid/main.css' rel='stylesheet' />
+  <link href='packages/list/main.css' rel='stylesheet' />
+  <link href='packages/rrule/main.css' rel='stylesheet' />
+  <script src='packages/core/main.js'></script>
+  <script src='packages/list/main.js'></script>
+  <script src='packages/rrule/main.js'></script>
+  <script src='packages/interaction/main.js'></script>
+  <script src='packages/daygrid/main.js'></script>
+	<script type="text/javascript">
+    
+    function loadCalendar(){
+     var calendarEl = document.getElementById('calendar');
+      var doubleClick=new Date();
+     // var clickTimer=null;
+     
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        
+        header: {
+              left: 'prev,next',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay'
+              },
+        locale: 'tr',
+        plugins: [ 'interaction', 'dayGrid' ],
+        defaultDate: new Date(),
+        droppable: true,
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
+        events: {
+        url: 'myfeed.php',
+        failure: function() {
+              alert(1);
+        }
+      },
+
+        eventDrop: function(info){
+          loadDoc(info.event);
+        },
+        eventClick: function() {
+            var singleClick=new Date();
+          if(Date.parse(doubleClick)-Date.parse(singleClick)>-50){
+            //alert("double click");
+            doubleClick=null;
+          }
+          else{
+            doubleClick=new Date();
+          }
+        },
+        dateClick:function(date,allDay,jsEvent,view){
+          var singleClick=new Date();
+          if(Date.parse(doubleClick)-Date.parse(singleClick)>-50){
+            //alert("double click");
+            doubleClick=null;
+          }
+          else{
+            doubleClick=new Date();
+          }
+        }
+
+        });
+
+      calendar.render();
+      calendar.setOption('height', 650);
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var calendarEl = document.getElementById('calendar');
+      var doubleClick=new Date();
+     // var clickTimer=null;
+
+      var calendar = new FullCalendar.Calendar(calendarEl, {
+        
+        header: {
+              left: 'prev,next',
+              center: 'title',
+              right: 'month,agendaWeek,agendaDay'
+              },
+        locale: 'tr',
+        plugins: [ 'interaction', 'dayGrid' ],
+        defaultDate: new Date(),
+        droppable: true,
+        editable: true,
+        eventLimit: true, // allow "more" link when too many events
+        events: {
+        url: 'myfeed.php',
+        failure: function() {
+              alert(1);
+        }
+      },
+
+        eventDrop: function(info){
+          loadDoc(info.event);
+        },
+        eventClick: function() {
+            var singleClick=new Date();
+          if(Date.parse(doubleClick)-Date.parse(singleClick)>-50){
+            //alert("double click");
+            doubleClick=null;
+          }
+          else{
+            doubleClick=new Date();
+          }
+        },
+        dateClick:function(date,allDay,jsEvent,view){
+          var singleClick=new Date();
+          if(Date.parse(doubleClick)-Date.parse(singleClick)>-50){
+            //alert("double click");
+            doubleClick=null;
+          }
+          else{
+            doubleClick=new Date();
+          }
+        }
+
+        });
+
+      calendar.render();
+      calendar.setOption('height', 650);
+    });
+
+        function fetchPreview() {
+
+          //var Title=document.getElementById("selectionn").value;
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("demo").innerHTML=this.responseText;
+            }
+          };
+          xhttp.open('POST', 'istek.php', true);
+          xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          xhttp.send("danisanID="+document.getElementById("selectionn").value);         
+          
+        }
+
+        function loadDoc22() {
+          var Title=document.getElementById("selectionn").value;
+          //alert(Title);
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              loadCalendar();
+            }
+          };
+          xhttp.open('POST', 'eventinput.php', true);
+          xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          xhttp.send("Title="+Title+"&date="+new Date().toISOString());         
+          
+        }
+       //document.getElementById("theBut").addEventListener("click",loadDoc22);
+        function loadDoc(id) {
+          var a=id;
+          //alert(a.id);
+          var date=a.start.toISOString();
+          //date=date.substring(0,10);
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+             //alert(this.responseText);
+            }
+          };
+          xhttp.open('POST', 'istek2.php', true);
+          xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+          xhttp.send("date="+date+"&ID="+a.id);                                                 
+        }
+   
+  </script>
 
 </head>
 <body style='background-color: orange'>
@@ -135,18 +311,18 @@ i {
   if($rs["password"]==$_POST["password"]){
      if($return>1)
 	  echo "
-	  <a href='yenikullanici.php' >
-		<p style='float: right; '>Yeni Çalışan Ekle </a>|<a href='index.php'> Çıkış Yap</a></p><pre><h1> Sancak Danışmanlık</h1></pre>
-		<br><br><br>
+	  <a style='color: orange;' href='yenikullanici.php' >
+		<p style='float: right; '>Yeni Çalışan Ekle </a>|<a style='color: orange;' href='index.php'> Çıkış Yap</a></p><pre><h1> Sancak Danışmanlık</h1></pre>
+		<br>
 		"; 
 	  else echo "<p style='float: right; '><a href='index.php'> Çıkış Yap</a></p><pre><h1> Sancak Danışmanlık</h1></pre>
   		<br><br><br>";
 
 
     echo "
-	<section ><form action='danisan1.php' method='post'>
+	<form action='danisan1.php' method='post'>
   		<nav>
-  			<select name='selection' id='selectionn' onchange='loadDoc()' size='20'>
+  			<select name='selection' id='selectionn' onchange='fetchPreview()' size='15'>
           ";
           
           $link=mysqli_connect('localhost','root','');
@@ -172,16 +348,14 @@ i {
   			
   		</nav>
   
-  <nav><button type='submit'>Sayfaya git</button></form><br><br><br><br><br><br><pre id='demo' style='font-size: 150%; color: gold;'><strong>              		 ".$bir."
-  			Ödenecek:    ".$fiyatı."TL
-               		  ".$numarası."</strong></pre></nav>
-  
- <nav></nav><nav></nav>
-  <br><br><br><br><br><br><br>
-  	<pre style='font-size: 150%; color: gold;'> <strong>Yeni Danışan Ekle</strong></pre>
-  	<form action='sonuc.php' method='post'>
+  <nav><button type='submit' class='mybut'>Sayfaya git</button></form><br><br><br><button type='button' onclick='return loadDoc22()' id='theBut' class='mybut'>Randevu Ekle</button><br><br><br><pre class='mybut' id='demo' style='font-size: 150%; color: gold;'><strong>".$bir."
+Ödenecek:    ".$fiyatı."TL
+".$numarası."</strong></pre><br>
+<div style='margin-left: -110%;'>
+<pre style='font-size: 150%; color: gold; '> <strong>Yeni Danışan Ekle</strong></pre>
+    <form action='sonuc.php' method='post'>
 
-		<div class='input-container'>
+    <div class='input-container'>
     
     <input class='input-field' type='text' placeholder='ilkisim' name='isim'>
   </div>
@@ -195,12 +369,14 @@ i {
     
     <input class='input-field' type='text' placeholder='telefon' name='numara'>
   </div>
-		
-		<br><pre>        <button type='submit' class='btn'>Giriş</button></pre>
+    
+    <br><pre>        <button type='submit' class='btn'>Giriş</button></pre>
     <input type='text' name='action' hidden value='add'>
 
-	</form>
-	</section>";}
+  </form></div></nav>
+  
+ <nav class='call'><div id='calendar'></nav></div>
+	";}
  else
   echo "<h1> BİLGİLER YANLIŞ </h1>"
 ?>
