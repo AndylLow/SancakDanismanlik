@@ -8,9 +8,20 @@
     $bir=$result['isim']." ".$result['soyisim'];
 
 
-	$Title=$bir;
+    $gecici=mysqli_fetch_array(
+        mysqli_query($link,"Select MAX(ID) FROM events "));
+    $gecici=$gecici[0]+1;
+
+    
+    $Title=$bir;
 	$date=$_POST["date"];
 	$link=mysqli_connect('localhost','root','');
     mysqli_select_db($link,'mydb');
-    mysqli_query($link,"insert into events(title,date) values('".$Title."','".$date."');");
+    mysqli_query($link,"insert into events values('".$gecici."','".$Title."','".$date."');");
+    
+
+
+
+
+
 ?>
